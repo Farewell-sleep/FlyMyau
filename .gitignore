@@ -28,3 +28,8 @@ run
 *.iml
 out
 build
+# Debug dumps
+er_dump.txt
+er_srg.txt
+of_dump.txt
+
