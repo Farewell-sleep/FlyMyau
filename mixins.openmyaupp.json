@@ -1,0 +1,7 @@
+{
+  "package": "myau.mixin",
+  "plugin": "myau.init.FMLLoadingPlugin",
+  "refmap": "mixins.openmyaupp.refmap.json",
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8"
+}

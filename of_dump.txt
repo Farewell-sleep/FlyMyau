@@ -1,0 +1,381 @@
+﻿Compiled from "OptiFineClassTransformer.java"
+public class optifine.OptiFineClassTransformer implements net.minecraft.launchwrapper.IClassTransformer,optifine.IResourceProvider,optifine.IOptiFineResourceLocator {
+  private java.util.zip.ZipFile ofZipFile;
+
+  private java.util.Map<java.lang.String, java.lang.String> patchMap;
+
+  private java.util.regex.Pattern[] patterns;
+
+  public static optifine.OptiFineClassTransformer instance;
+
+  static {};
+    Code:
+       0: aconst_null
+       1: putstatic     #24                 // Field instance:Loptifine/OptiFineClassTransformer;
+       4: return
+
+  public optifine.OptiFineClassTransformer();
+    Code:
+       0: aload_0
+       1: invokespecial #29                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aconst_null
+       6: putfield      #31                 // Field ofZipFile:Ljava/util/zip/ZipFile;
+       9: aload_0
+      10: aconst_null
+      11: putfield      #33                 // Field patchMap:Ljava/util/Map;
+      14: aload_0
+      15: aconst_null
+      16: putfield      #35                 // Field patterns:[Ljava/util/regex/Pattern;
+      19: aload_0
+      20: putstatic     #24                 // Field instance:Loptifine/OptiFineClassTransformer;
+      23: ldc           #37                 // String OptiFine ClassTransformer
+      25: invokestatic  #39                 // Method dbg:(Ljava/lang/String;)V
+      28: ldc           #1                  // class optifine/OptiFineClassTransformer
+      30: invokevirtual #43                 // Method java/lang/Class.getProtectionDomain:()Ljava/security/ProtectionDomain;
+      33: invokevirtual #49                 // Method java/security/ProtectionDomain.getCodeSource:()Ljava/security/CodeSource;
+      36: invokevirtual #55                 // Method java/security/CodeSource.getLocation:()Ljava/net/URL;
+      39: astore_1
+      40: aload_1
+      41: invokevirtual #61                 // Method java/net/URL.toURI:()Ljava/net/URI;
+      44: astore_2
+      45: new           #67                 // class java/io/File
+      48: dup
+      49: aload_2
+      50: invokespecial #69                 // Method java/io/File."<init>":(Ljava/net/URI;)V
+      53: astore_3
+      54: aload_0
+      55: new           #72                 // class java/util/zip/ZipFile
+      58: dup
+      59: aload_3
+      60: invokespecial #74                 // Method java/util/zip/ZipFile."<init>":(Ljava/io/File;)V
+      63: putfield      #31                 // Field ofZipFile:Ljava/util/zip/ZipFile;
+      66: new           #77                 // class java/lang/StringBuilder
+      69: dup
+      70: ldc           #79                 // String OptiFine ZIP file:
+      72: invokespecial #81                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      75: aload_3
+      76: invokevirtual #83                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+      79: invokevirtual #87                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      82: invokestatic  #39                 // Method dbg:(Ljava/lang/String;)V
+      85: aload_0
+      86: aload_0
+      87: getfield      #31                 // Field ofZipFile:Ljava/util/zip/ZipFile;
+      90: invokestatic  #91                 // Method optifine/Patcher.getConfigurationMap:(Ljava/util/zip/ZipFile;)Ljava/util/Map;
+      93: putfield      #33                 // Field patchMap:Ljava/util/Map;
+      96: aload_0
+      97: aload_0
+      98: getfield      #33                 // Field patchMap:Ljava/util/Map;
+     101: invokestatic  #97                 // Method optifine/Patcher.getConfigurationPatterns:(Ljava/util/Map;)[Ljava/util/regex/Pattern;
+     104: putfield      #35                 // Field patterns:[Ljava/util/regex/Pattern;
+     107: aload_0
+     108: invokestatic  #101                // Method optifine/OptiFineResourceLocator.setResourceLocator:(Loptifine/IOptiFineResourceLocator;)V
+     111: goto          119
+     114: astore_1
+     115: aload_1
+     116: invokevirtual #107                // Method java/lang/Exception.printStackTrace:()V
+     119: aload_0
+     120: getfield      #31                 // Field ofZipFile:Ljava/util/zip/ZipFile;
+     123: ifnonnull     136
+     126: ldc           #112                // String *** Can not find the OptiFine JAR in the classpath ***
+     128: invokestatic  #39                 // Method dbg:(Ljava/lang/String;)V
+     131: ldc           #114                // String *** OptiFine will not be loaded! ***
+     133: invokestatic  #39                 // Method dbg:(Ljava/lang/String;)V
+     136: return
+    Exception table:
+       from    to  target type
+          23   111   114   Class java/lang/Exception
+
+  public byte[] transform(java.lang.String, java.lang.String, byte[]);
+    Code:
+       0: new           #77                 // class java/lang/StringBuilder
+       3: dup
+       4: aload_1
+       5: invokestatic  #128                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+       8: invokespecial #81                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      11: ldc           #134                // String .class
+      13: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      16: invokevirtual #87                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      19: astore        4
+      21: aload_0
+      22: aload         4
+      24: invokevirtual #139                // Method getOptiFineResource:(Ljava/lang/String;)[B
+      27: astore        5
+      29: aload         5
+      31: ifnull        37
+      34: aload         5
+      36: areturn
+      37: aload_3
+      38: areturn
+
+  public synchronized java.io.InputStream getOptiFineResourceStream(java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc           #153                // String /
+       3: invokestatic  #155                // Method optifine/Utils.removePrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       6: astore_1
+       7: aload_0
+       8: aload_1
+       9: invokevirtual #139                // Method getOptiFineResource:(Ljava/lang/String;)[B
+      12: astore_2
+      13: aload_2
+      14: ifnonnull     19
+      17: aconst_null
+      18: areturn
+      19: new           #161                // class java/io/ByteArrayInputStream
+      22: dup
+      23: aload_2
+      24: invokespecial #163                // Method java/io/ByteArrayInputStream."<init>":([B)V
+      27: astore_3
+      28: aload_3
+      29: areturn
+
+  public java.io.InputStream getResourceStream(java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc           #153                // String /
+       3: invokestatic  #169                // Method optifine/Utils.ensurePrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       6: astore_1
+       7: aload_0
+       8: invokevirtual #172                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      11: aload_1
+      12: invokevirtual #176                // Method java/lang/Class.getResourceAsStream:(Ljava/lang/String;)Ljava/io/InputStream;
+      15: areturn
+
+  public synchronized byte[] getOptiFineResource(java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc           #153                // String /
+       3: invokestatic  #155                // Method optifine/Utils.removePrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       6: astore_1
+       7: aload_0
+       8: aload_1
+       9: invokevirtual #180                // Method getOptiFineResourceZip:(Ljava/lang/String;)[B
+      12: astore_2
+      13: aload_2
+      14: ifnull        19
+      17: aload_2
+      18: areturn
+      19: aload_0
+      20: aload_1
+      21: aload_0
+      22: invokevirtual #183                // Method getOptiFineResourcePatched:(Ljava/lang/String;Loptifine/IResourceProvider;)[B
+      25: astore_2
+      26: aload_2
+      27: ifnull        32
+      30: aload_2
+      31: areturn
+      32: aconst_null
+      33: areturn
+
+  public synchronized byte[] getOptiFineResourceZip(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #31                 // Field ofZipFile:Ljava/util/zip/ZipFile;
+       4: ifnonnull     9
+       7: aconst_null
+       8: areturn
+       9: aload_1
+      10: ldc           #153                // String /
+      12: invokestatic  #155                // Method optifine/Utils.removePrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      15: astore_1
+      16: aload_0
+      17: getfield      #31                 // Field ofZipFile:Ljava/util/zip/ZipFile;
+      20: aload_1
+      21: invokevirtual #187                // Method java/util/zip/ZipFile.getEntry:(Ljava/lang/String;)Ljava/util/zip/ZipEntry;
+      24: astore_2
+      25: aload_2
+      26: ifnonnull     31
+      29: aconst_null
+      30: areturn
+      31: aload_0
+      32: getfield      #31                 // Field ofZipFile:Ljava/util/zip/ZipFile;
+      35: aload_2
+      36: invokevirtual #191                // Method java/util/zip/ZipFile.getInputStream:(Ljava/util/zip/ZipEntry;)Ljava/io/InputStream;
+      39: astore_3
+      40: aload_3
+      41: invokestatic  #195                // Method readAll:(Ljava/io/InputStream;)[B
+      44: astore        4
+      46: aload_3
+      47: invokevirtual #199                // Method java/io/InputStream.close:()V
+      50: aload         4
+      52: arraylength
+      53: i2l
+      54: aload_2
+      55: invokevirtual #204                // Method java/util/zip/ZipEntry.getSize:()J
+      58: lcmp
+      59: ifeq          106
+      62: new           #77                 // class java/lang/StringBuilder
+      65: dup
+      66: ldc           #210                // String Invalid size, name:
+      68: invokespecial #81                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      71: aload_1
+      72: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      75: ldc           #212                // String , zip:
+      77: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      80: aload_2
+      81: invokevirtual #204                // Method java/util/zip/ZipEntry.getSize:()J
+      84: invokevirtual #214                // Method java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+      87: ldc           #217                // String , stream:
+      89: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      92: aload         4
+      94: arraylength
+      95: invokevirtual #219                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+      98: invokevirtual #87                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     101: invokestatic  #39                 // Method dbg:(Ljava/lang/String;)V
+     104: aconst_null
+     105: areturn
+     106: aload         4
+     108: areturn
+     109: astore_3
+     110: aload_3
+     111: invokevirtual #222                // Method java/io/IOException.printStackTrace:()V
+     114: aconst_null
+     115: areturn
+    Exception table:
+       from    to  target type
+          31   104   109   Class java/io/IOException
+         106   108   109   Class java/io/IOException
+
+  public synchronized byte[] getOptiFineResourcePatched(java.lang.String, optifine.IResourceProvider);
+    Code:
+       0: aload_0
+       1: getfield      #35                 // Field patterns:[Ljava/util/regex/Pattern;
+       4: ifnull        18
+       7: aload_0
+       8: getfield      #33                 // Field patchMap:Ljava/util/Map;
+      11: ifnull        18
+      14: aload_2
+      15: ifnonnull     20
+      18: aconst_null
+      19: areturn
+      20: aload_1
+      21: ldc           #153                // String /
+      23: invokestatic  #155                // Method optifine/Utils.removePrefix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      26: astore_1
+      27: new           #77                 // class java/lang/StringBuilder
+      30: dup
+      31: ldc           #229                // String patch/
+      33: invokespecial #81                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      36: aload_1
+      37: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      40: ldc           #231                // String .xdelta
+      42: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      45: invokevirtual #87                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      48: astore_3
+      49: aload_0
+      50: aload_3
+      51: invokevirtual #180                // Method getOptiFineResourceZip:(Ljava/lang/String;)[B
+      54: astore        4
+      56: aload         4
+      58: ifnonnull     63
+      61: aconst_null
+      62: areturn
+      63: aload_1
+      64: aload         4
+      66: aload_0
+      67: getfield      #35                 // Field patterns:[Ljava/util/regex/Pattern;
+      70: aload_0
+      71: getfield      #33                 // Field patchMap:Ljava/util/Map;
+      74: aload_2
+      75: invokestatic  #233                // Method optifine/Patcher.applyPatch:(Ljava/lang/String;[B[Ljava/util/regex/Pattern;Ljava/util/Map;Loptifine/IResourceProvider;)[B
+      78: astore        5
+      80: new           #77                 // class java/lang/StringBuilder
+      83: dup
+      84: ldc           #229                // String patch/
+      86: invokespecial #81                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      89: aload_1
+      90: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      93: ldc           #237                // String .md5
+      95: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      98: invokevirtual #87                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     101: astore        6
+     103: aload_0
+     104: aload         6
+     106: invokevirtual #180                // Method getOptiFineResourceZip:(Ljava/lang/String;)[B
+     109: astore        7
+     111: aload         7
+     113: ifnull        200
+     116: new           #129                // class java/lang/String
+     119: dup
+     120: aload         7
+     122: ldc           #239                // String ASCII
+     124: invokespecial #241                // Method java/lang/String."<init>":([BLjava/lang/String;)V
+     127: astore        8
+     129: aload         5
+     131: invokestatic  #244                // Method optifine/HashUtils.getHashMd5:([B)[B
+     134: astore        9
+     136: aload         9
+     138: invokestatic  #250                // Method optifine/HashUtils.toHexString:([B)Ljava/lang/String;
+     141: astore        10
+     143: aload         8
+     145: aload         10
+     147: invokevirtual #254                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     150: ifne          200
+     153: new           #223                // class java/io/IOException
+     156: dup
+     157: new           #77                 // class java/lang/StringBuilder
+     160: dup
+     161: ldc_w         #258                // String MD5 not matching, name:
+     164: invokespecial #81                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+     167: aload_1
+     168: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     171: ldc_w         #260                // String , saved:
+     174: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     177: aload         8
+     179: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     182: ldc_w         #262                // String , patched:
+     185: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     188: aload         10
+     190: invokevirtual #136                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     193: invokevirtual #87                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     196: invokespecial #264                // Method java/io/IOException."<init>":(Ljava/lang/String;)V
+     199: athrow
+     200: aload         5
+     202: areturn
+     203: astore        5
+     205: aload         5
+     207: invokevirtual #107                // Method java/lang/Exception.printStackTrace:()V
+     210: aconst_null
+     211: areturn
+    Exception table:
+       from    to  target type
+          63   202   203   Class java/lang/Exception
+
+  public static byte[] readAll(java.io.InputStream) throws java.io.IOException;
+    Code:
+       0: new           #275                // class java/io/ByteArrayOutputStream
+       3: dup
+       4: invokespecial #277                // Method java/io/ByteArrayOutputStream."<init>":()V
+       7: astore_1
+       8: sipush        1024
+      11: newarray       byte
+      13: astore_2
+      14: aload_0
+      15: aload_2
+      16: invokevirtual #278                // Method java/io/InputStream.read:([B)I
+      19: istore_3
+      20: iload_3
+      21: ifge          27
+      24: goto          37
+      27: aload_1
+      28: aload_2
+      29: iconst_0
+      30: iload_3
+      31: invokevirtual #282                // Method java/io/ByteArrayOutputStream.write:([BII)V
+      34: goto          14
+      37: aload_0
+      38: invokevirtual #199                // Method java/io/InputStream.close:()V
+      41: aload_1
+      42: invokevirtual #286                // Method java/io/ByteArrayOutputStream.toByteArray:()[B
+      45: astore_3
+      46: aload_3
+      47: areturn
+
+  private static void dbg(java.lang.String);
+    Code:
+       0: getstatic     #296                // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: aload_0
+       4: invokevirtual #302                // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       7: return
+}
